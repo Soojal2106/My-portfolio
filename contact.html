@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Page - Soojal Gupta</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      .form-message {
+        margin-top: 15px;
+        font-weight: bold;
+        display: none;
+        padding: 10px;
+        border-radius: 5px;
+      }
+      .success {
+        color: #155724;
+        background-color: #d4edda;
+        border: 1px solid #c3e6cb;
+      }
+      .error {
+        color: #721c24;
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+       <h2 class="logo">Soojal Gupta</h2> 
+      <nav class="navbar">
+        <ul class="navbar-lists">
+          <li><a class="navbar-link home-link" href="index.html">Home</a></li>
+          <li><a class="navbar-link about-link" href="about.html">About</a></li>
+          <li><a class="navbar-link service-link" href="service.html">Services</a></li>
+          <li><a class="navbar-link portfolio-link" href="index.html#portfolio-section">Portfolio</a></li>
+          <li><a class="navbar-link" href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Contact Section -->
+    <section class="section section-contact">
+      <div class="container">
+        <h2 class="common-heading">Get in Touch</h2>
+        <p>If you have any queries, project ideas, or collaboration opportunities, feel free to contact me.</p>
+      </div>
+
+      <div class="section-contact-main container">
+        <form id="contactForm" action="https://formspree.io/f/xnqwzoro" method="POST">
+          <div class="grid grid-two-col">
+            <input type="text" name="username" id="username" required placeholder="Your Name" />
+            <input type="email" name="email" id="email" required placeholder="Your Email" autocomplete="false" />
+          </div>
+          <div>
+            <input type="text" name="subject" id="subject" placeholder="Subject" />
+          </div>
+          <div>
+            <textarea name="message" id="message" placeholder="Message" required></textarea>
+          </div>
+          <div>
+            <input type="submit" value="Send Message" class="btn" />
+          </div>
+          <!-- Success / Error Message -->
+          <div id="formMessage" class="form-message"></div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="section section-footer">
+      <div class="container grid grid-four-col">
+        <div class="f-about">
+          <h3>About Me</h3>
+          <p>
+            I am <b>Soojal Gupta</b>, a Java Backend Developer passionate about creating scalable and secure applications using Java, Spring Boot, Hibernate, and REST APIs.
+          </p>
+        </div>
+
+        <div class="f-links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="service.html">Services</a></li>
+            <li><a href="index.html#portfolio-section">Portfolio</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="f-services">
+          <h3>Core Services</h3>
+          <ul>
+            <li>Java Backend Development</li>
+            <li>REST API Development</li>
+            <li>Database Management</li>
+            <li>Full Stack Web Apps</li>
+            <li>Microservices & Deployment</li>
+          </ul>
+        </div>
+
+        <div class="f-address">
+          <h3>Contact Info</h3>
+          <address>
+            <p><i class="fa-solid fa-location-dot"></i> Noida, Uttar Pradesh, India</p>
+            <p><i class="fa-solid fa-phone"></i> <a href="tel:+919685086435">+91 9685086435</a></p>
+            <p><i class="fa-solid fa-envelope"></i> <a href="mailto:soojalgupta57@gmail.com">soojalgupta57@gmail.com</a></p>
+          </address>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="f-social-icons">
+          <a href="https://linkedin.com/in/soojal-gupta-768731281" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="https://github.com/Soojal2106" target="_blank"><i class="fa-brands fa-github"></i></a>
+          <a href="https://www.youtube.com/" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+
+        <div class="f-credits">
+          <p>© 2025 Soojal Gupta | Java Backend Developer</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JS -->
+    <script>
+      const form = document.getElementById("contactForm");
+      const formMessage = document.getElementById("formMessage");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        formMessage.style.display = "none";
+
+        const formData = new FormData(form);
+        try {
+          const response = await fetch(form.action, {
+            method: form.method,
+            body: formData,
+            headers: { Accept: "application/json" },
+          });
+
+          if (response.ok) {
+            formMessage.textContent = "✅ Message sent successfully!";
+            formMessage.className = "form-message success";
+            formMessage.style.display = "block";
+            form.reset();
+          } else {
+            formMessage.textContent = "❌ Oops! Something went wrong. Please try again.";
+            formMessage.className = "form-message error";
+            formMessage.style.display = "block";
+          }
+        } catch (error) {
+          formMessage.textContent = "⚠️ Network error. Please check your connection.";
+          formMessage.className = "form-message error";
+          formMessage.style.display = "block";
+        }
+      });
+    </script>
+
+  </body>
+</html>
